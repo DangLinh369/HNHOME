@@ -1,0 +1,709 @@
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Be+Vietnam+Pro:wght@300;400;500;600&display=swap');
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --primary: #0B2340;
+    --primary-mid: #1A3D6B;
+    --accent: #C89B3C;
+    --accent-light: #F0D080;
+    --white: #FFFFFF;
+    --off-white: #F8F7F4;
+    --gray-light: #EEF0F3;
+    --gray-mid: #8A94A6;
+    --text: #1A2535;
+    --text-muted: #5C6880;
+    --radius: 12px;
+    --radius-sm: 8px;
+  }
+
+  .site { font-family: 'Be Vietnam Pro', sans-serif; color: var(--text); background: var(--white); width: 100%; overflow-x: hidden; }
+
+  /* ── HEADER ── */
+  .header { background: var(--primary); padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 64px; position: sticky; top: 0; z-index: 100; }
+  .header-logo { display: flex; align-items: center; gap: 10px; }
+  .logo-icon { width: 36px; height: 36px; background: var(--accent); border-radius: 8px; display: flex; align-items: center; justify-content: center; }
+  .logo-icon svg { width: 22px; height: 22px; fill: var(--primary); }
+  .logo-text { color: var(--white); font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 700; letter-spacing: 1px; }
+  .logo-sub { color: var(--accent); font-size: 10px; font-weight: 300; letter-spacing: 2px; text-transform: uppercase; display: block; margin-top: -3px; }
+  .nav { display: flex; gap: 0; }
+  .nav a { color: rgba(255,255,255,0.75); text-decoration: none; font-size: 13px; font-weight: 500; padding: 0 14px; height: 64px; display: flex; align-items: center; transition: color 0.2s; border-bottom: 2px solid transparent; }
+  .nav a:hover, .nav a.active { color: var(--white); border-bottom-color: var(--accent); }
+  .header-cta { display: flex; align-items: center; gap: 10px; }
+  .btn-outline { border: 1px solid rgba(200,155,60,0.6); color: var(--accent); background: transparent; padding: 8px 16px; border-radius: var(--radius-sm); font-size: 13px; cursor: pointer; font-family: inherit; font-weight: 500; transition: all 0.2s; }
+  .btn-outline:hover { background: var(--accent); color: var(--primary); }
+  .btn-solid { background: var(--accent); color: var(--primary); border: none; padding: 8px 18px; border-radius: var(--radius-sm); font-size: 13px; font-weight: 600; cursor: pointer; font-family: inherit; transition: all 0.2s; }
+  .btn-solid:hover { background: var(--accent-light); }
+
+  /* ── HERO ── */
+  .hero { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-mid) 60%, #243B55 100%); padding: 64px 2rem 0; position: relative; overflow: hidden; }
+  .hero::before { content: ''; position: absolute; top: -80px; right: -80px; width: 400px; height: 400px; border-radius: 50%; background: rgba(200,155,60,0.07); }
+  .hero::after { content: ''; position: absolute; bottom: 40px; left: -60px; width: 250px; height: 250px; border-radius: 50%; background: rgba(200,155,60,0.05); }
+  .hero-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; position: relative; z-index: 1; }
+  .hero-tag { display: inline-flex; align-items: center; gap: 6px; background: rgba(200,155,60,0.15); border: 1px solid rgba(200,155,60,0.3); color: var(--accent); font-size: 12px; font-weight: 500; padding: 5px 12px; border-radius: 20px; margin-bottom: 1.2rem; letter-spacing: 0.5px; }
+  .hero h1 { font-family: 'Playfair Display', serif; color: var(--white); font-size: 42px; font-weight: 700; line-height: 1.2; margin-bottom: 1rem; }
+  .hero h1 span { color: var(--accent); }
+  .hero p { color: rgba(255,255,255,0.65); font-size: 15px; line-height: 1.7; margin-bottom: 2rem; }
+  .hero-stats { display: flex; gap: 2rem; }
+  .stat { text-align: center; }
+  .stat-num { font-family: 'Playfair Display', serif; color: var(--accent); font-size: 28px; font-weight: 700; display: block; }
+  .stat-label { color: rgba(255,255,255,0.5); font-size: 12px; margin-top: 2px; }
+  .stat-divider { width: 1px; background: rgba(255,255,255,0.15); }
+
+  /* Search card */
+  .search-card { background: var(--white); border-radius: var(--radius); padding: 1.5rem; }
+  .search-tabs { display: flex; gap: 0; margin-bottom: 1.2rem; border-bottom: 1.5px solid var(--gray-light); }
+  .tab { font-size: 13px; font-weight: 500; color: var(--text-muted); padding: 8px 16px; cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -1.5px; transition: all 0.2s; }
+  .tab.active { color: var(--primary); border-bottom-color: var(--accent); }
+  .search-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
+  .search-field { display: flex; flex-direction: column; gap: 4px; }
+  .search-field label { font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+  .search-field select, .search-field input { border: 1px solid var(--gray-light); border-radius: var(--radius-sm); padding: 9px 12px; font-family: inherit; font-size: 13px; color: var(--text); background: var(--off-white); outline: none; }
+  .search-field select:focus, .search-field input:focus { border-color: var(--accent); background: var(--white); }
+  .btn-search { width: 100%; background: var(--primary); color: var(--white); border: none; padding: 12px; border-radius: var(--radius-sm); font-family: inherit; font-size: 14px; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 4px; transition: background 0.2s; }
+  .btn-search:hover { background: var(--primary-mid); }
+  .hero-visual-bottom { background: rgba(255,255,255,0.04); border-top: 1px solid rgba(255,255,255,0.08); padding: 16px 0; margin-top: 48px; display: flex; align-items: center; gap: 2rem; }
+  .trust-item { display: flex; align-items: center; gap: 8px; color: rgba(255,255,255,0.55); font-size: 12px; }
+  .trust-icon { width: 28px; height: 28px; background: rgba(200,155,60,0.12); border-radius: 6px; display: flex; align-items: center; justify-content: center; color: var(--accent); font-size: 14px; }
+
+  /* ── FEATURED ── */
+  .section { padding: 4rem 2rem; }
+  .section-alt { background: var(--off-white); }
+  .section-inner { max-width: 1100px; margin: 0 auto; }
+  .section-head { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 2.5rem; }
+  .section-label { font-size: 11px; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 6px; }
+  .section-title { font-family: 'Playfair Display', serif; font-size: 30px; font-weight: 700; color: var(--primary); line-height: 1.2; }
+  .see-all { font-size: 13px; color: var(--primary-mid); font-weight: 500; text-decoration: none; display: flex; align-items: center; gap: 4px; }
+  .see-all:hover { color: var(--accent); }
+  .cards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+  .prop-card { background: var(--white); border-radius: var(--radius); overflow: hidden; border: 1px solid var(--gray-light); transition: transform 0.2s; cursor: pointer; }
+  .prop-card:hover { transform: translateY(-3px); }
+  .card-img { height: 175px; background: var(--gray-light); position: relative; overflow: hidden; }
+  .card-img-bg { width: 100%; height: 100%; object-fit: cover; display: flex; align-items: center; justify-content: center; }
+  .img-placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
+  .card-badge { position: absolute; top: 10px; left: 10px; background: var(--primary); color: var(--white); font-size: 10px; font-weight: 600; padding: 4px 8px; border-radius: 5px; letter-spacing: 0.5px; }
+  .card-badge.rent { background: #0F6E56; }
+  .card-badge.hot { background: #993C1D; }
+  .card-body { padding: 1rem; }
+  .card-price { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; color: var(--accent); margin-bottom: 4px; }
+  .card-price span { font-size: 13px; font-family: 'Be Vietnam Pro', sans-serif; font-weight: 400; color: var(--text-muted); }
+  .card-title { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 6px; line-height: 1.4; }
+  .card-location { font-size: 12px; color: var(--text-muted); display: flex; align-items: center; gap: 4px; margin-bottom: 10px; }
+  .card-meta { display: flex; gap: 12px; padding-top: 10px; border-top: 1px solid var(--gray-light); }
+  .meta-item { font-size: 12px; color: var(--text-muted); display: flex; align-items: center; gap: 4px; }
+  .card-actions { display: flex; gap: 6px; padding: 0 1rem 1rem; }
+  .card-btn { flex: 1; padding: 8px; border-radius: var(--radius-sm); font-family: inherit; font-size: 12px; font-weight: 600; cursor: pointer; border: 1px solid var(--gray-light); background: var(--off-white); color: var(--text); transition: all 0.2s; }
+  .card-btn.primary { background: var(--primary); color: var(--white); border-color: var(--primary); }
+  .card-btn:hover { opacity: 0.85; }
+
+  /* ── CATEGORIES ── */
+  .cat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+  .cat-card { background: var(--white); border: 1px solid var(--gray-light); border-radius: var(--radius); padding: 1.5rem 1rem; text-align: center; cursor: pointer; transition: all 0.2s; }
+  .cat-card:hover { border-color: var(--accent); }
+  .cat-card:hover .cat-icon { background: var(--primary); color: var(--white); }
+  .cat-icon { width: 52px; height: 52px; border-radius: 14px; background: var(--primary); display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; font-size: 22px; color: var(--white); transition: all 0.2s; }
+  .cat-name { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+  .cat-count { font-size: 12px; color: var(--text-muted); }
+
+  /* ── ABOUT ── */
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+  .about-img { background: var(--gray-light); border-radius: var(--radius); height: 320px; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+  .about-badge { position: absolute; bottom: 1.5rem; right: 1.5rem; background: var(--white); border-radius: var(--radius-sm); padding: 12px 16px; display: flex; gap: 10px; align-items: center; }
+  .badge-num { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; color: var(--primary); }
+  .badge-text { font-size: 12px; color: var(--text-muted); line-height: 1.4; }
+  .about-text p { color: var(--text-muted); font-size: 14px; line-height: 1.8; margin-bottom: 1.5rem; }
+  .about-features { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 1.5rem; }
+  .feat-item { display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 500; }
+  .feat-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+
+  /* ── LEAD FORM ── */
+  .lead-wrap { background: var(--primary); border-radius: 16px; padding: 3rem; display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+  .lead-text h2 { font-family: 'Playfair Display', serif; color: var(--white); font-size: 28px; margin-bottom: 1rem; line-height: 1.3; }
+  .lead-text h2 span { color: var(--accent); }
+  .lead-text p { color: rgba(255,255,255,0.6); font-size: 14px; line-height: 1.7; }
+  .lead-form { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .form-field { display: flex; flex-direction: column; gap: 5px; }
+  .form-field.full { grid-column: 1 / -1; }
+  .form-field label { font-size: 11px; font-weight: 600; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.5px; }
+  .form-field input, .form-field select { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); color: var(--white); border-radius: var(--radius-sm); padding: 10px 12px; font-family: inherit; font-size: 13px; outline: none; }
+  .form-field input::placeholder { color: rgba(255,255,255,0.35); }
+  .form-field input:focus, .form-field select:focus { border-color: var(--accent); background: rgba(255,255,255,0.12); }
+  .form-field select option { background: var(--primary); }
+  .btn-submit { grid-column: 1 / -1; background: var(--accent); color: var(--primary); border: none; padding: 13px; border-radius: var(--radius-sm); font-family: inherit; font-size: 14px; font-weight: 700; cursor: pointer; transition: background 0.2s; }
+  .btn-submit:hover { background: var(--accent-light); }
+
+  /* ── FOOTER ── */
+  .footer { background: #060F1C; padding: 3rem 2rem 1.5rem; }
+  .footer-inner { max-width: 1100px; margin: 0 auto; }
+  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 2.5rem; margin-bottom: 2.5rem; }
+  .footer-brand p { color: rgba(255,255,255,0.45); font-size: 13px; line-height: 1.7; margin: 1rem 0; }
+  .footer-socials { display: flex; gap: 8px; margin-top: 1rem; }
+  .social-btn { width: 34px; height: 34px; border: 1px solid rgba(255,255,255,0.12); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.5); font-size: 15px; cursor: pointer; transition: all 0.2s; text-decoration: none; }
+  .social-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .footer-col h4 { color: var(--white); font-size: 13px; font-weight: 600; margin-bottom: 1rem; }
+  .footer-col a { display: block; color: rgba(255,255,255,0.45); font-size: 13px; text-decoration: none; margin-bottom: 8px; transition: color 0.2s; }
+  .footer-col a:hover { color: var(--accent); }
+  .footer-contact-item { display: flex; align-items: center; gap: 8px; color: rgba(255,255,255,0.45); font-size: 13px; margin-bottom: 10px; }
+  .footer-bottom { border-top: 1px solid rgba(255,255,255,0.07); padding-top: 1.5rem; display: flex; align-items: center; justify-content: space-between; }
+  .footer-bottom p { color: rgba(255,255,255,0.3); font-size: 12px; }
+
+  /* ── LISTING PAGE PREVIEW ── */
+  .page-section { padding: 3rem 2rem; border-top: 1px solid var(--gray-light); }
+  .page-layout { display: grid; grid-template-columns: 260px 1fr; gap: 1.5rem; max-width: 1100px; margin: 0 auto; }
+  .filter-panel { background: var(--white); border: 1px solid var(--gray-light); border-radius: var(--radius); padding: 1.25rem; height: fit-content; }
+  .filter-title { font-size: 13px; font-weight: 700; color: var(--primary); margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.5px; }
+  .filter-group { margin-bottom: 1.2rem; }
+  .filter-group label { font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; display: block; margin-bottom: 6px; }
+  .filter-group select { width: 100%; border: 1px solid var(--gray-light); border-radius: var(--radius-sm); padding: 8px 10px; font-family: inherit; font-size: 13px; color: var(--text); background: var(--off-white); outline: none; }
+  .filter-group select:focus { border-color: var(--accent); }
+  .filter-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .filter-tag { font-size: 12px; padding: 5px 10px; border: 1px solid var(--gray-light); border-radius: 20px; cursor: pointer; color: var(--text-muted); transition: all 0.2s; }
+  .filter-tag.active, .filter-tag:hover { background: var(--primary); color: var(--white); border-color: var(--primary); }
+  .listing-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+  .listing-toolbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; }
+  .listing-count { font-size: 13px; color: var(--text-muted); }
+  .sort-select { border: 1px solid var(--gray-light); border-radius: var(--radius-sm); padding: 7px 10px; font-family: inherit; font-size: 13px; background: var(--white); outline: none; color: var(--text); }
+
+  /* ── MODULE NAV ── */
+  .module-nav { background: var(--primary); padding: 12px 2rem; display: flex; gap: 6px; overflow-x: auto; }
+  .mod-btn { background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.65); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; padding: 6px 14px; font-family: inherit; font-size: 12px; font-weight: 500; cursor: pointer; white-space: nowrap; transition: all 0.2s; }
+  .mod-btn:hover, .mod-btn.active { background: var(--accent); color: var(--primary); border-color: var(--accent); font-weight: 700; }
+
+  .page-content { display: none; }
+  .page-content.active { display: block; }
+
+  /* ── CHATBOT ── */
+  .chatbot-fab { position: fixed; bottom: 24px; right: 24px; width: 52px; height: 52px; background: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 22px; color: var(--primary); z-index: 200; }
+</style>
+
+<div class="site">
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-logo">
+      <div class="logo-icon">
+        <svg viewBox="0 0 24 24"><path d="M3 12l9-9 9 9v9a1 1 0 01-1 1H4a1 1 0 01-1-1v-9z"/><path d="M9 22V12h6v10"/></svg>
+      </div>
+      <div>
+        <div class="logo-text">HN HOME</div>
+        <span class="logo-sub">Uy Tín – Chất Lượng</span>
+      </div>
+    </div>
+    <nav class="nav">
+      <a href="#" class="active" onclick="showPage('home',this)">Trang chủ</a>
+      <a href="#" onclick="showPage('listing',this)">Nhà bán</a>
+      <a href="#" onclick="showPage('rental',this)">Phòng trọ</a>
+      <a href="#" onclick="showPage('project',this)">Dự án</a>
+      <a href="#" onclick="showPage('contact',this)">Liên hệ</a>
+    </nav>
+    <div class="header-cta">
+      <button class="btn-outline">Đăng nhập</button>
+      <button class="btn-solid">Đăng tin</button>
+    </div>
+  </header>
+
+  <!-- MODULE NAV -->
+  <div class="module-nav">
+    <button class="mod-btn active" onclick="showMod('home-mod',this)">🏠 Trang chủ</button>
+    <button class="mod-btn" onclick="showMod('listing-mod',this)">📋 Danh sách BĐS</button>
+    <button class="mod-btn" onclick="showMod('rental-mod',this)">🏘 Phòng trọ</button>
+    <button class="mod-btn" onclick="showMod('detail-mod',this)">🔍 Chi tiết BĐS</button>
+    <button class="mod-btn" onclick="showMod('lead-mod',this)">📬 Thu lead</button>
+    <button class="mod-btn" onclick="showMod('footer-mod',this)">📌 Footer</button>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- MODULE 1: TRANG CHỦ -->
+  <!-- ═══════════════════════════════════════════ -->
+  <div id="home-mod" class="page-content active">
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-inner">
+        <div>
+          <div class="hero-tag"><i class="ti ti-shield-check" aria-hidden="true" style="font-size:13px"></i> Uy tín hàng đầu TP.HCM</div>
+          <h1>Tìm <span>Ngôi Nhà</span><br>Phù Hợp Với Bạn</h1>
+          <p>Hàng nghìn bất động sản được kiểm định chất lượng.<br>Đội ngũ tư vấn tận tâm 24/7.</p>
+          <div class="hero-stats">
+            <div class="stat"><span class="stat-num">1,200+</span><div class="stat-label">Tin đăng</div></div>
+            <div class="stat-divider"></div>
+            <div class="stat"><span class="stat-num">850+</span><div class="stat-label">Khách hàng</div></div>
+            <div class="stat-divider"></div>
+            <div class="stat"><span class="stat-num">5+</span><div class="stat-label">Năm kinh nghiệm</div></div>
+          </div>
+        </div>
+        <div class="search-card">
+          <div class="search-tabs">
+            <div class="tab active" onclick="setTab(this)">Mua bán</div>
+            <div class="tab" onclick="setTab(this)">Cho thuê</div>
+            <div class="tab" onclick="setTab(this)">Phòng trọ</div>
+          </div>
+          <div class="search-row">
+            <div class="search-field">
+              <label>Loại bất động sản</label>
+              <select><option>Tất cả loại hình</option><option>Căn hộ</option><option>Nhà phố</option><option>Đất nền</option></select>
+            </div>
+            <div class="search-field">
+              <label>Khu vực</label>
+              <select><option>Tất cả khu vực</option><option>Quận 1</option><option>Quận 7</option><option>Quận Bình Thạnh</option></select>
+            </div>
+          </div>
+          <div class="search-row">
+            <div class="search-field">
+              <label>Khoảng giá</label>
+              <select><option>Tất cả mức giá</option><option>Dưới 2 tỷ</option><option>2–5 tỷ</option><option>Trên 5 tỷ</option></select>
+            </div>
+            <div class="search-field">
+              <label>Diện tích</label>
+              <select><option>Tất cả diện tích</option><option>Dưới 50m²</option><option>50–100m²</option><option>Trên 100m²</option></select>
+            </div>
+          </div>
+          <button class="btn-search"><i class="ti ti-search" aria-hidden="true"></i> Tìm kiếm bất động sản</button>
+        </div>
+      </div>
+      <div class="hero-visual-bottom" style="max-width:1100px;margin:0 auto;padding:16px 0;">
+        <div class="trust-item"><div class="trust-icon"><i class="ti ti-certificate" aria-hidden="true"></i></div> Pháp lý rõ ràng</div>
+        <div class="trust-item"><div class="trust-icon"><i class="ti ti-headset" aria-hidden="true"></i></div> Tư vấn 24/7</div>
+        <div class="trust-item"><div class="trust-icon"><i class="ti ti-map-pin" aria-hidden="true"></i></div> 20+ quận/huyện</div>
+        <div class="trust-item"><div class="trust-icon"><i class="ti ti-star" aria-hidden="true"></i></div> 4.9/5 đánh giá</div>
+      </div>
+    </section>
+
+    <!-- CATEGORIES -->
+    <section class="section section-alt">
+      <div class="section-inner">
+        <div class="section-head">
+          <div><div class="section-label">Khám phá</div><div class="section-title">Danh mục bất động sản</div></div>
+        </div>
+        <div class="cat-grid">
+          <div class="cat-card">
+            <div class="cat-icon"><i class="ti ti-building" aria-hidden="true"></i></div>
+            <div class="cat-name">Căn hộ chung cư</div>
+            <div class="cat-count">320 tin đăng</div>
+          </div>
+          <div class="cat-card">
+            <div class="cat-icon"><i class="ti ti-home-2" aria-hidden="true"></i></div>
+            <div class="cat-name">Nhà phố / Nhà riêng</div>
+            <div class="cat-count">480 tin đăng</div>
+          </div>
+          <div class="cat-card">
+            <div class="cat-icon" style="background:var(--off-white);"><i class="ti ti-layout-grid" aria-hidden="true" style="color:var(--primary)"></i></div>
+            <div class="cat-name">Đất nền / Dự án</div>
+            <div class="cat-count">215 tin đăng</div>
+          </div>
+          <div class="cat-card">
+            <div class="cat-icon" style="background:var(--off-white);"><i class="ti ti-door" aria-hidden="true" style="color:var(--primary)"></i></div>
+            <div class="cat-name">Phòng trọ / CHDT</div>
+            <div class="cat-count">190 tin đăng</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURED LISTINGS -->
+    <section class="section">
+      <div class="section-inner">
+        <div class="section-head">
+          <div><div class="section-label">Nổi bật</div><div class="section-title">Bất động sản tiêu biểu</div></div>
+          <a href="#" class="see-all">Xem tất cả <i class="ti ti-arrow-right" aria-hidden="true"></i></a>
+        </div>
+        <div class="cards-grid">
+          <!-- Card 1 -->
+          <div class="prop-card">
+            <div class="card-img">
+              <div class="img-placeholder" style="background:linear-gradient(135deg,#1A3D6B,#0B2340);">
+                <i class="ti ti-building" style="font-size:48px;color:rgba(200,155,60,0.4)" aria-hidden="true"></i>
+              </div>
+              <span class="card-badge hot">🔥 Nổi bật</span>
+            </div>
+            <div class="card-body">
+              <div class="card-price">3.2 tỷ <span>VNĐ</span></div>
+              <div class="card-title">Căn hộ cao cấp K-Home Cityview – View sông đẹp</div>
+              <div class="card-location"><i class="ti ti-map-pin" aria-hidden="true" style="font-size:13px"></i> Quận 7, TP.HCM</div>
+              <div class="card-meta">
+                <div class="meta-item"><i class="ti ti-ruler-2" aria-hidden="true"></i> 75m²</div>
+                <div class="meta-item"><i class="ti ti-bed" aria-hidden="true"></i> 2PN</div>
+                <div class="meta-item"><i class="ti ti-bath" aria-hidden="true"></i> 2WC</div>
+              </div>
+            </div>
+            <div class="card-actions">
+              <button class="card-btn">Liên hệ</button>
+              <button class="card-btn primary">Xem chi tiết</button>
+            </div>
+          </div>
+          <!-- Card 2 -->
+          <div class="prop-card">
+            <div class="card-img">
+              <div class="img-placeholder" style="background:linear-gradient(135deg,#243B55,#1A2F44);">
+                <i class="ti ti-home-2" style="font-size:48px;color:rgba(200,155,60,0.4)" aria-hidden="true"></i>
+              </div>
+              <span class="card-badge">Mua bán</span>
+            </div>
+            <div class="card-body">
+              <div class="card-price">5.8 tỷ <span>VNĐ</span></div>
+              <div class="card-title">Nhà phố liền kề, hẻm xe hơi, gần trường quốc tế</div>
+              <div class="card-location"><i class="ti ti-map-pin" aria-hidden="true" style="font-size:13px"></i> Bình Thạnh, TP.HCM</div>
+              <div class="card-meta">
+                <div class="meta-item"><i class="ti ti-ruler-2" aria-hidden="true"></i> 110m²</div>
+                <div class="meta-item"><i class="ti ti-bed" aria-hidden="true"></i> 4PN</div>
+                <div class="meta-item"><i class="ti ti-bath" aria-hidden="true"></i> 3WC</div>
+              </div>
+            </div>
+            <div class="card-actions">
+              <button class="card-btn">Liên hệ</button>
+              <button class="card-btn primary">Xem chi tiết</button>
+            </div>
+          </div>
+          <!-- Card 3 -->
+          <div class="prop-card">
+            <div class="card-img">
+              <div class="img-placeholder" style="background:linear-gradient(135deg,#0F4C3A,#0B2340);">
+                <i class="ti ti-door" style="font-size:48px;color:rgba(200,155,60,0.4)" aria-hidden="true"></i>
+              </div>
+              <span class="card-badge rent">Cho thuê</span>
+            </div>
+            <div class="card-body">
+              <div class="card-price">7 triệu <span>/tháng</span></div>
+              <div class="card-title">Căn hộ dịch vụ Nguyễn Trọng Tuyển – Full nội thất</div>
+              <div class="card-location"><i class="ti ti-map-pin" aria-hidden="true" style="font-size:13px"></i> Phú Nhuận, TP.HCM</div>
+              <div class="card-meta">
+                <div class="meta-item"><i class="ti ti-ruler-2" aria-hidden="true"></i> 35m²</div>
+                <div class="meta-item"><i class="ti ti-bed" aria-hidden="true"></i> 1PN</div>
+                <div class="meta-item"><i class="ti ti-wifi" aria-hidden="true"></i> Wifi</div>
+              </div>
+            </div>
+            <div class="card-actions">
+              <button class="card-btn">Liên hệ</button>
+              <button class="card-btn primary">Xem chi tiết</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="section section-alt">
+      <div class="section-inner">
+        <div class="about-grid">
+          <div class="about-img" style="background:linear-gradient(135deg,#0B2340,#1A3D6B);">
+            <i class="ti ti-building-skyscraper" style="font-size:80px;color:rgba(200,155,60,0.3)" aria-hidden="true"></i>
+            <div class="about-badge">
+              <div class="badge-num">5+</div>
+              <div class="badge-text">Năm kinh<br>nghiệm</div>
+            </div>
+          </div>
+          <div class="about-text">
+            <div class="section-label">Về chúng tôi</div>
+            <div class="section-title" style="margin-bottom:1rem">HN Home – Đối tác<br>bất động sản tin cậy</div>
+            <p>HN Home là đơn vị môi giới bất động sản uy tín tại TP.HCM, chuyên cung cấp dịch vụ tư vấn mua bán, cho thuê nhà đất với tiêu chí "Uy tín – Chất lượng".</p>
+            <p>Đội ngũ chuyên viên giàu kinh nghiệm, am hiểu thị trường địa phương, luôn sẵn sàng hỗ trợ khách hàng 24/7.</p>
+            <div class="about-features">
+              <div class="feat-item"><div class="feat-dot"></div> Pháp lý minh bạch</div>
+              <div class="feat-item"><div class="feat-dot"></div> Giá tốt nhất thị trường</div>
+              <div class="feat-item"><div class="feat-dot"></div> Tư vấn tận tâm</div>
+              <div class="feat-item"><div class="feat-dot"></div> Hỗ trợ vay ngân hàng</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- MODULE 2: DANH SÁCH BĐS -->
+  <!-- ═══════════════════════════════════════════ -->
+  <div id="listing-mod" class="page-content">
+    <div class="page-section">
+      <div class="page-layout">
+        <aside class="filter-panel">
+          <div class="filter-title"><i class="ti ti-adjustments-horizontal" aria-hidden="true"></i> Bộ lọc</div>
+          <div class="filter-group">
+            <label>Thành phố</label>
+            <select><option>TP. Hồ Chí Minh</option><option>Hà Nội</option></select>
+          </div>
+          <div class="filter-group">
+            <label>Quận / Huyện</label>
+            <select><option>Tất cả quận</option><option>Quận 1</option><option>Quận 7</option><option>Bình Thạnh</option><option>Phú Nhuận</option></select>
+          </div>
+          <div class="filter-group">
+            <label>Khoảng giá</label>
+            <select><option>Tất cả</option><option>Dưới 2 tỷ</option><option>2–5 tỷ</option><option>5–10 tỷ</option><option>Trên 10 tỷ</option></select>
+          </div>
+          <div class="filter-group">
+            <label>Diện tích</label>
+            <select><option>Tất cả</option><option>Dưới 50m²</option><option>50–100m²</option><option>Trên 100m²</option></select>
+          </div>
+          <div class="filter-group">
+            <label>Loại hình</label>
+            <div class="filter-tags">
+              <span class="filter-tag active">Tất cả</span>
+              <span class="filter-tag" onclick="toggleTag(this)">Căn hộ</span>
+              <span class="filter-tag" onclick="toggleTag(this)">Nhà phố</span>
+              <span class="filter-tag" onclick="toggleTag(this)">Đất nền</span>
+            </div>
+          </div>
+          <div class="filter-group">
+            <label>Số phòng ngủ</label>
+            <div class="filter-tags">
+              <span class="filter-tag active">Tất cả</span>
+              <span class="filter-tag" onclick="toggleTag(this)">1PN</span>
+              <span class="filter-tag" onclick="toggleTag(this)">2PN</span>
+              <span class="filter-tag" onclick="toggleTag(this)">3PN+</span>
+            </div>
+          </div>
+          <div class="filter-group">
+            <label>Nội thất</label>
+            <div class="filter-tags">
+              <span class="filter-tag active">Tất cả</span>
+              <span class="filter-tag" onclick="toggleTag(this)">Có nội thất</span>
+              <span class="filter-tag" onclick="toggleTag(this)">Không nội thất</span>
+            </div>
+          </div>
+          <button class="btn-search" style="margin-top:8px">Áp dụng bộ lọc</button>
+        </aside>
+        <div>
+          <div class="listing-toolbar">
+            <div class="listing-count"><strong>480</strong> bất động sản phù hợp</div>
+            <select class="sort-select"><option>Mới nhất</option><option>Giá tăng dần</option><option>Giá giảm dần</option><option>Diện tích lớn nhất</option></select>
+          </div>
+          <div class="listing-grid">
+            <div class="prop-card">
+              <div class="card-img"><div class="img-placeholder" style="background:linear-gradient(135deg,#1A3D6B,#0B2340);"><i class="ti ti-building" style="font-size:40px;color:rgba(200,155,60,0.4)" aria-hidden="true"></i></div><span class="card-badge hot">Nổi bật</span></div>
+              <div class="card-body"><div class="card-price">3.2 tỷ</div><div class="card-title">Căn hộ K-Home Cityview, view sông</div><div class="card-location"><i class="ti ti-map-pin" aria-hidden="true" style="font-size:12px"></i> Quận 7, TP.HCM</div><div class="card-meta"><div class="meta-item"><i class="ti ti-ruler-2" aria-hidden="true"></i> 75m²</div><div class="meta-item"><i class="ti ti-bed" aria-hidden="true"></i> 2PN</div></div></div>
+              <div class="card-actions"><button class="card-btn">Liên hệ</button><button class="card-btn primary">Chi tiết</button></div>
+            </div>
+            <div class="prop-card">
+              <div class="card-img"><div class="img-placeholder" style="background:linear-gradient(135deg,#243B55,#1A2F44);"><i class="ti ti-home-2" style="font-size:40px;color:rgba(200,155,60,0.4)" aria-hidden="true"></i></div><span class="card-badge">Mua bán</span></div>
+              <div class="card-body"><div class="card-price">5.8 tỷ</div><div class="card-title">Nhà phố Bình Thạnh, hẻm xe hơi</div><div class="card-location"><i class="ti ti-map-pin" aria-hidden="true" style="font-size:12px"></i> Bình Thạnh, TP.HCM</div><div class="card-meta"><div class="meta-item"><i class="ti ti-ruler-2" aria-hidden="true"></i> 110m²</div><div class="meta-item"><i class="ti ti-bed" aria-hidden="true"></i> 4PN</div></div></div>
+              <div class="card-actions"><button class="card-btn">Liên hệ</button><button class="card-btn primary">Chi tiết</button></div>
+            </div>
+            <div class="prop-card">
+              <div class="card-img"><div class="img-placeholder" style="background:linear-gradient(135deg,#0F4C3A,#0B3028);"><i class="ti ti-layout-grid" style="font-size:40px;color:rgba(200,155,60,0.4)" aria-hidden="true"></i></div><span class="card-badge">Đất nền</span></div>
+              <div class="card-body"><div class="card-price">2.1 tỷ</div><div class="card-title">Đất nền Long An, gần KCN lớn</div><div class="card-location"><i class="ti ti-map-pin" aria-hidden="true" style="font-size:12px"></i> Long An</div><div class="card-meta"><div class="meta-item"><i class="ti ti-ruler-2" aria-hidden="true"></i> 150m²</div><div class="meta-item"><i class="ti ti-road" aria-hidden="true"></i> MT đường</div></div></div>
+              <div class="card-actions"><button class="card-btn">Liên hệ</button><button class="card-btn primary">Chi tiết</button></div>
+            </div>
+            <div class="prop-card">
+              <div class="card-img"><div class="img-placeholder" style="background:linear-gradient(135deg,#3B2C1A,#251B0F);"><i class="ti ti-building-skyscraper" style="font-size:40px;color:rgba(200,155,60,0.4)" aria-hidden="true"></i></div><span class="card-badge rent">Cho thuê</span></div>
+              <div class="card-body"><div class="card-price">12 triệu <span>/tháng</span></div><div class="card-title">Căn hộ 2PN Thảo Điền, full nội thất</div><div class="card-location"><i class="ti ti-map-pin" aria-hidden="true" style="font-size:12px"></i> Thủ Đức, TP.HCM</div><div class="card-meta"><div class="meta-item"><i class="ti ti-ruler-2" aria-hidden="true"></i> 68m²</div><div class="meta-item"><i class="ti ti-bed" aria-hidden="true"></i> 2PN</div></div></div>
+              <div class="card-actions"><button class="card-btn">Liên hệ</button><button class="card-btn primary">Chi tiết</button></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- MODULE 3: PHÒNG TRỌ -->
+  <!-- ═══════════════════════════════════════════ -->
+  <div id="rental-mod" class="page-content">
+    <div class="page-section">
+      <div class="section-inner">
+        <div class="section-head">
+          <div><div class="section-label">Cho thuê</div><div class="section-title">Phòng trọ & Căn hộ dịch vụ</div></div>
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:1.5rem">
+          <span class="filter-tag active" onclick="toggleTag(this)">Tất cả</span>
+          <span class="filter-tag" onclick="toggleTag(this)">Giá rẻ dưới 3tr</span>
+          <span class="filter-tag" onclick="toggleTag(this)">Gần trường học</span>
+          <span class="filter-tag" onclick="toggleTag(this)">Gần KCN</span>
+          <span class="filter-tag" onclick="toggleTag(this)">Có gác lửng</span>
+          <span class="filter-tag" onclick="toggleTag(this)">Giờ tự do</span>
+          <span class="filter-tag" onclick="toggleTag(this)">Full nội thất</span>
+          <span class="filter-tag" onclick="toggleTag(this)">Có ban công</span>
+        </div>
+        <div class="cards-grid">
+          <div class="prop-card">
+            <div class="card-img"><div class="img-placeholder" style="background:linear-gradient(135deg,#1A3D6B,#0B2340);"><i class="ti ti-door" style="font-size:48px;color:rgba(200,155,60,0.4)" aria-hidden="true"></i></div><span class="card-badge rent">Căn hộ DV</span></div>
+            <div class="card-body"><div class="card-price">7 triệu <span>/tháng</span></div><div class="card-title">Căn hộ DV Nguyễn Trọng Tuyển – 1PN có ban công</div><div class="card-location"><i class="ti ti-map-pin" aria-hidden="true" style="font-size:12px"></i> Phú Nhuận, TP.HCM</div><div class="card-meta"><div class="meta-item"><i class="ti ti-ruler-2" aria-hidden="true"></i> 30–45m²</div><div class="meta-item"><i class="ti ti-wifi" aria-hidden="true"></i> Wifi</div><div class="meta-item"><i class="ti ti-wind" aria-hidden="true"></i> Máy lạnh</div></div></div>
+            <div class="card-actions"><button class="card-btn">Liên hệ</button><button class="card-btn primary">Chi tiết</button></div>
+          </div>
+          <div class="prop-card">
+            <div class="card-img"><div class="img-placeholder" style="background:linear-gradient(135deg,#2C1810,#1A0F0A);"><i class="ti ti-door" style="font-size:48px;color:rgba(200,155,60,0.4)" aria-hidden="true"></i></div><span class="card-badge rent">Phòng trọ</span></div>
+            <div class="card-body"><div class="card-price">2.5 triệu <span>/tháng</span></div><div class="card-title">Phòng trọ sạch sẽ gần ĐH Kinh Tế, giờ tự do</div><div class="card-location"><i class="ti ti-map-pin" aria-hidden="true" style="font-size:12px"></i> Quận 10, TP.HCM</div><div class="card-meta"><div class="meta-item"><i class="ti ti-ruler-2" aria-hidden="true"></i> 20m²</div><div class="meta-item"><i class="ti ti-wifi" aria-hidden="true"></i> Wifi</div><div class="meta-item"><i class="ti ti-clock" aria-hidden="true"></i> Tự do</div></div></div>
+            <div class="card-actions"><button class="card-btn">Liên hệ</button><button class="card-btn primary">Chi tiết</button></div>
+          </div>
+          <div class="prop-card">
+            <div class="card-img"><div class="img-placeholder" style="background:linear-gradient(135deg,#0F3A2A,#071F16);"><i class="ti ti-building" style="font-size:48px;color:rgba(200,155,60,0.4)" aria-hidden="true"></i></div><span class="card-badge rent">2PN</span></div>
+            <div class="card-body"><div class="card-price">9 triệu <span>/tháng</span></div><div class="card-title">Căn hộ DV 2PN Phú Nhuận – Full nội thất, mới 100%</div><div class="card-location"><i class="ti ti-map-pin" aria-hidden="true" style="font-size:12px"></i> Phú Nhuận, TP.HCM</div><div class="card-meta"><div class="meta-item"><i class="ti ti-ruler-2" aria-hidden="true"></i> 50m²</div><div class="meta-item"><i class="ti ti-sofa" aria-hidden="true"></i> Full NT</div><div class="meta-item"><i class="ti ti-sun" aria-hidden="true"></i> Ban công</div></div></div>
+            <div class="card-actions"><button class="card-btn">Liên hệ</button><button class="card-btn primary">Chi tiết</button></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- MODULE 4: CHI TIẾT BĐS -->
+  <!-- ═══════════════════════════════════════════ -->
+  <div id="detail-mod" class="page-content">
+    <div class="page-section">
+      <div class="section-inner">
+        <div style="display:grid;grid-template-columns:1fr 340px;gap:1.5rem">
+          <div>
+            <div style="background:linear-gradient(135deg,#1A3D6B,#0B2340);border-radius:var(--radius);height:280px;display:flex;align-items:center;justify-content:center;margin-bottom:12px;position:relative">
+              <i class="ti ti-building" style="font-size:80px;color:rgba(200,155,60,0.3)" aria-hidden="true"></i>
+              <span class="card-badge hot" style="top:16px;left:16px;font-size:12px;padding:6px 12px">🔥 Nổi bật</span>
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px">
+              <div style="background:var(--gray-light);border-radius:8px;height:70px;display:flex;align-items:center;justify-content:center"><i class="ti ti-photo" style="color:var(--text-muted);font-size:20px" aria-hidden="true"></i></div>
+              <div style="background:var(--gray-light);border-radius:8px;height:70px;display:flex;align-items:center;justify-content:center"><i class="ti ti-photo" style="color:var(--text-muted);font-size:20px" aria-hidden="true"></i></div>
+              <div style="background:var(--gray-light);border-radius:8px;height:70px;display:flex;align-items:center;justify-content:center"><i class="ti ti-photo" style="color:var(--text-muted);font-size:20px" aria-hidden="true"></i></div>
+              <div style="background:var(--gray-light);border-radius:8px;height:70px;display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--text-muted)">+5 ảnh</div>
+            </div>
+            <div style="margin-top:1.5rem">
+              <div style="font-size:11px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px">Căn hộ chung cư · Quận 7</div>
+              <h2 style="font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:var(--primary);margin-bottom:8px">Căn hộ cao cấp K-Home Cityview – View sông, nội thất đầy đủ</h2>
+              <div style="display:flex;gap:1.5rem;margin-bottom:1.2rem">
+                <div style="font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:var(--accent)">3.2 tỷ <span style="font-size:14px;font-family:'Be Vietnam Pro',sans-serif;font-weight:400;color:var(--text-muted)">VNĐ</span></div>
+              </div>
+              <div style="display:flex;gap:1rem;flex-wrap:wrap;padding:1rem;background:var(--off-white);border-radius:var(--radius-sm);margin-bottom:1.2rem">
+                <div style="text-align:center"><div style="font-size:18px;font-weight:700;color:var(--primary)">75m²</div><div style="font-size:11px;color:var(--text-muted)">Diện tích</div></div>
+                <div style="width:1px;background:var(--gray-light)"></div>
+                <div style="text-align:center"><div style="font-size:18px;font-weight:700;color:var(--primary)">2</div><div style="font-size:11px;color:var(--text-muted)">Phòng ngủ</div></div>
+                <div style="width:1px;background:var(--gray-light)"></div>
+                <div style="text-align:center"><div style="font-size:18px;font-weight:700;color:var(--primary)">2</div><div style="font-size:11px;color:var(--text-muted)">Toilet</div></div>
+                <div style="width:1px;background:var(--gray-light)"></div>
+                <div style="text-align:center"><div style="font-size:18px;font-weight:700;color:var(--primary)">Đông Nam</div><div style="font-size:11px;color:var(--text-muted)">Hướng</div></div>
+              </div>
+              <p style="font-size:14px;line-height:1.8;color:var(--text-muted)">Căn hộ K-Home Cityview tọa lạc tại vị trí đắc địa với tầm nhìn hướng sông tuyệt đẹp. Cách Lotte Mart 5 phút, AEON Mall 20 phút, Sân bay Long Thành 30 phút. Nội thất cao cấp, thiết kế hiện đại...</p>
+              <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:1rem">
+                <span style="background:var(--off-white);border:1px solid var(--gray-light);border-radius:20px;padding:5px 12px;font-size:12px;color:var(--text-muted)"><i class="ti ti-wifi" aria-hidden="true"></i> Wifi</span>
+                <span style="background:var(--off-white);border:1px solid var(--gray-light);border-radius:20px;padding:5px 12px;font-size:12px;color:var(--text-muted)"><i class="ti ti-wind" aria-hidden="true"></i> Máy lạnh</span>
+                <span style="background:var(--off-white);border:1px solid var(--gray-light);border-radius:20px;padding:5px 12px;font-size:12px;color:var(--text-muted)"><i class="ti ti-sofa" aria-hidden="true"></i> Full NT</span>
+                <span style="background:var(--off-white);border:1px solid var(--gray-light);border-radius:20px;padding:5px 12px;font-size:12px;color:var(--text-muted)"><i class="ti ti-car" aria-hidden="true"></i> Chỗ đậu xe</span>
+                <span style="background:var(--off-white);border:1px solid var(--gray-light);border-radius:20px;padding:5px 12px;font-size:12px;color:var(--text-muted)"><i class="ti ti-swimming" aria-hidden="true"></i> Hồ bơi</span>
+              </div>
+            </div>
+          </div>
+          <!-- Sidebar -->
+          <div>
+            <div style="background:var(--white);border:1px solid var(--gray-light);border-radius:var(--radius);padding:1.25rem;margin-bottom:1rem">
+              <div style="display:flex;align-items:center;gap:10px;margin-bottom:1rem">
+                <div style="width:44px;height:44px;border-radius:50%;background:var(--primary);display:flex;align-items:center;justify-content:center;color:var(--accent);font-weight:700">HN</div>
+                <div><div style="font-size:14px;font-weight:600;color:var(--text)">Học Nguyễn Realty</div><div style="font-size:12px;color:var(--text-muted)">Chuyên viên BĐS</div></div>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:1rem">
+                <button class="btn-solid" style="width:100%;padding:11px;font-size:14px"><i class="ti ti-phone" aria-hidden="true"></i> Gọi: 0776 578 582</button>
+                <button class="btn-outline" style="width:100%;padding:11px;font-size:14px"><i class="ti ti-brand-whatsapp" aria-hidden="true"></i> Chat Zalo</button>
+              </div>
+              <div style="border-top:1px solid var(--gray-light);padding-top:1rem">
+                <div style="font-size:12px;font-weight:600;color:var(--text);margin-bottom:8px">Gửi yêu cầu tư vấn</div>
+                <input type="text" placeholder="Họ và tên" style="width:100%;margin-bottom:8px;border:1px solid var(--gray-light);border-radius:var(--radius-sm);padding:9px 12px;font-family:inherit;font-size:13px;outline:none">
+                <input type="text" placeholder="Số điện thoại" style="width:100%;margin-bottom:8px;border:1px solid var(--gray-light);border-radius:var(--radius-sm);padding:9px 12px;font-family:inherit;font-size:13px;outline:none">
+                <textarea placeholder="Nội dung..." rows="3" style="width:100%;margin-bottom:8px;border:1px solid var(--gray-light);border-radius:var(--radius-sm);padding:9px 12px;font-family:inherit;font-size:13px;outline:none;resize:none"></textarea>
+                <button class="btn-search">Gửi yêu cầu</button>
+              </div>
+            </div>
+            <div style="background:var(--gray-light);border-radius:var(--radius);height:150px;display:flex;align-items:center;justify-content:center;color:var(--text-muted);font-size:13px"><i class="ti ti-map-2" style="font-size:24px;margin-right:8px" aria-hidden="true"></i> Google Maps</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- MODULE 5: THU LEAD -->
+  <!-- ═══════════════════════════════════════════ -->
+  <div id="lead-mod" class="page-content">
+    <div class="section">
+      <div class="section-inner">
+        <div class="lead-wrap">
+          <div class="lead-text">
+            <div style="font-size:11px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:2px;margin-bottom:8px">Tư vấn miễn phí</div>
+            <h2>Để lại thông tin,<br>nhận tư vấn <span>miễn phí</span><br>trong 24h</h2>
+            <p style="margin-top:1rem">Đội ngũ chuyên viên HN Home sẽ liên hệ để tư vấn bất động sản phù hợp với nhu cầu và ngân sách của bạn.</p>
+            <div style="display:flex;gap:1.5rem;margin-top:1.5rem">
+              <div><div style="font-size:20px;font-weight:700;color:var(--accent)">98%</div><div style="font-size:12px;color:rgba(255,255,255,0.5)">Khách hài lòng</div></div>
+              <div><div style="font-size:20px;font-weight:700;color:var(--accent)">&lt;2h</div><div style="font-size:12px;color:rgba(255,255,255,0.5)">Phản hồi trung bình</div></div>
+            </div>
+          </div>
+          <div class="lead-form">
+            <div class="form-field"><label>Họ và tên *</label><input type="text" placeholder="Nguyễn Văn A"></div>
+            <div class="form-field"><label>Số điện thoại *</label><input type="text" placeholder="0xxxxxxxxx"></div>
+            <div class="form-field"><label>Email</label><input type="email" placeholder="example@gmail.com"></div>
+            <div class="form-field"><label>Nhu cầu</label><select><option>Mua bất động sản</option><option>Thuê nhà / phòng trọ</option><option>Đầu tư</option></select></div>
+            <div class="form-field"><label>Khu vực quan tâm</label><select><option>Quận 1</option><option>Quận 7</option><option>Bình Thạnh</option><option>Phú Nhuận</option></select></div>
+            <div class="form-field"><label>Ngân sách</label><select><option>Dưới 2 tỷ</option><option>2–5 tỷ</option><option>5–10 tỷ</option><option>Trên 10 tỷ</option></select></div>
+            <button class="btn-submit">Gửi thông tin – Nhận tư vấn miễn phí ✓</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- MODULE 6: FOOTER -->
+  <!-- ═══════════════════════════════════════════ -->
+  <div id="footer-mod" class="page-content">
+    <footer class="footer">
+      <div class="footer-inner">
+        <div class="footer-grid">
+          <div class="footer-brand">
+            <div class="header-logo">
+              <div class="logo-icon"><svg viewBox="0 0 24 24"><path d="M3 12l9-9 9 9v9a1 1 0 01-1 1H4a1 1 0 01-1-1v-9z"/><path d="M9 22V12h6v10"/></svg></div>
+              <div><div class="logo-text">HN HOME</div><span class="logo-sub">Uy Tín – Chất Lượng</span></div>
+            </div>
+            <p>Đơn vị môi giới bất động sản uy tín tại TP.HCM. Chuyên tư vấn mua bán, cho thuê nhà đất và phòng trọ.</p>
+            <div class="footer-socials">
+              <a class="social-btn" title="Facebook"><i class="ti ti-brand-facebook" aria-hidden="true"></i></a>
+              <a class="social-btn" title="Zalo"><i class="ti ti-message-circle" aria-hidden="true"></i></a>
+              <a class="social-btn" title="YouTube"><i class="ti ti-brand-youtube" aria-hidden="true"></i></a>
+            </div>
+          </div>
+          <div class="footer-col">
+            <h4>Bất động sản</h4>
+            <a href="#">Nhà bán</a>
+            <a href="#">Căn hộ</a>
+            <a href="#">Đất nền</a>
+            <a href="#">Dự án mới</a>
+            <a href="#">Nhà xã hội</a>
+          </div>
+          <div class="footer-col">
+            <h4>Cho thuê</h4>
+            <a href="#">Phòng trọ</a>
+            <a href="#">Căn hộ DV</a>
+            <a href="#">Nhà nguyên căn</a>
+            <a href="#">Gần trường học</a>
+            <a href="#">Gần KCN</a>
+          </div>
+          <div class="footer-col">
+            <h4>Liên hệ</h4>
+            <div class="footer-contact-item"><i class="ti ti-phone" aria-hidden="true"></i> 0776 578 582</div>
+            <div class="footer-contact-item"><i class="ti ti-mail" aria-hidden="true"></i> hnhome@gmail.com</div>
+            <div class="footer-contact-item"><i class="ti ti-map-pin" aria-hidden="true"></i> TP. Hồ Chí Minh</div>
+            <div class="footer-contact-item"><i class="ti ti-clock" aria-hidden="true"></i> 8:00 – 20:00 hàng ngày</div>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>© 2025 HN Home. Uy Tín – Chất Lượng.</p>
+          <p>Chính sách bảo mật · Điều khoản sử dụng</p>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- CHATBOT FAB -->
+  <div class="chatbot-fab" title="Chat hỗ trợ" onclick="alert('Chatbot sẽ được tích hợp ở giai đoạn tiếp theo!')">
+    <i class="ti ti-message-chatbot" aria-hidden="true"></i>
+  </div>
+
+</div>
+
+<script>
+function showMod(id, btn) {
+  document.querySelectorAll('.page-content').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.mod-btn').forEach(el => el.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+function setTab(el) {
+  el.closest('.search-tabs').querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+}
+function toggleTag(el) {
+  el.classList.toggle('active');
+}
+</script>
